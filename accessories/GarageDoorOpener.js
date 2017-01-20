@@ -49,8 +49,20 @@ module.exports = function (iface) {
                     log.debug('> hap update', settings.name, 'TargetDoorState.CLOSED');
                     garage.getService(Service.GarageDoorOpener)
                         .updateCharacteristic(Characteristic.TargetDoorState, Characteristic.CurrentDoorState.CLOSED);
-
-
+                } else if (val === settings.payload.doorOpening) {
+                    log.debug('> hap set', settings.name, 'CurrentDoorState.OPENING');
+                    garage.getService(Service.GarageDoorOpener)
+                        .setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPENING);
+                    log.debug('> hap update', settings.name, 'TargetDoorState.OPEN');
+                    garage.getService(Service.GarageDoorOpener)
+                        .updateCharacteristic(Characteristic.TargetDoorState, Characteristic.CurrentDoorState.OPEN);
+                } else if (val === settings.payload.doorClosing) {
+                    log.debug('> hap set', settings.name, 'CurrentDoorState.CLOSING');
+                    garage.getService(Service.GarageDoorOpener)
+                        .setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSING);
+                    log.debug('> hap update', settings.name, 'TargetDoorState.CLOSED');
+                    garage.getService(Service.GarageDoorOpener)
+                        .updateCharacteristic(Characteristic.TargetDoorState, Characteristic.CurrentDoorState.CLOSED);
                 } else {
                     log.debug('> hap set', settings.name, 'CurrentDoorState.OPEN');
                     garage.getService(Service.GarageDoorOpener)
@@ -58,7 +70,6 @@ module.exports = function (iface) {
                     log.debug('> hap update', settings.name, 'TargetDoorState.OPEN');
                     garage.getService(Service.GarageDoorOpener)
                         .updateCharacteristic(Characteristic.TargetDoorState, Characteristic.CurrentDoorState.OPEN);
-
                 }
             });
 
